@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Thêm thức uống"
+        android:textColor="#E53935"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:layout_below="@+id/text"
+        android:hint="Mã thức uống"/>
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:layout_below="@+id/id"
+        android:hint="Tên thức uống"/>
+
+    <ImageView
+        android:id="@+id/imageAnh"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_below="@+id/title"/>
+
+
+    <EditText
+        android:id="@+id/mota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageAnh"
+        android:hint="Mô tả"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/gia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mota"
+        android:hint="Giá"
+        android:textSize="25dp" />
+
+    <Button
+        android:id="@+id/btnThem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="thêm"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_below="@id/gia"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnChonAnh"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:text="Chọn ảnh" />
+
+    <Button
+        android:id="@+id/btnChupAnh"
+        android:layout_marginLeft="220dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnChonAnh"
+        android:text="chụp ảnh" />
+
+
+</RelativeLayout>
