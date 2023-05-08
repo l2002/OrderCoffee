@@ -1,6 +1,8 @@
 package com.example.ordercoffee.Model;
 
-public class Drink {
+import java.io.Serializable;
+
+public class Drink implements Serializable {
     private int id;
     private String tieuDe;
     private byte[] anh;

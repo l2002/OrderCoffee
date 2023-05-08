@@ -56,6 +56,7 @@ public class DrinkAdapter extends BaseAdapter {
         View row=inflater.inflate(R.layout.drink_crud_item,null);
 
         ImageView image=(ImageView) row.findViewById(R.id.anh);
+
         TextView id=(TextView) row.findViewById(R.id.txtId);
         TextView tieude=(TextView) row.findViewById(R.id.txtTieuDe);
         TextView mota=(TextView) row.findViewById(R.id.txtMota);
@@ -63,6 +64,7 @@ public class DrinkAdapter extends BaseAdapter {
 
         Button sua=(Button) row.findViewById(R.id.btnSua);
         Button xoa=(Button) row.findViewById(R.id.btnXoa);
+
 
         final Drink drink=list.get(position);
 

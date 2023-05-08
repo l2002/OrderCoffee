@@ -1,5 +1,8 @@
 package com.example.ordercoffee.Adapter;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ordercoffee.Activity.ShowDetailActivity;
 import com.example.ordercoffee.Model.Drink;
 import com.example.ordercoffee.R;
 
@@ -30,7 +34,7 @@ public class PhoBienAdapter extends RecyclerView.Adapter<PhoBienAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PhoBienAdapter.ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull PhoBienAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position){
         holder.title.setText(popularDrink.get(position).getTieuDe());
         holder.fee.setText(String.valueOf(popularDrink.get(position).getFee()));
 

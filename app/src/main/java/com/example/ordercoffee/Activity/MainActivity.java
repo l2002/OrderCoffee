@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         recyclerViewDanhMuc();
 
         recyclerViewPhoBien();
@@ -80,11 +81,12 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
         recyclerViewDanhMucList.setLayoutManager(linearLayoutManager);
 
         ArrayList<DanhMuc> danhMucDomains=new ArrayList<>();
-        danhMucDomains.add(new DanhMuc("Coffee", R.drawable.coffee));
+        danhMucDomains.add(new DanhMuc("Coffee", R.drawable.icon_app));
         danhMucDomains.add(new DanhMuc("Tea", R.drawable.logo1));
 
         adapter2 = new DanhMucAdapter(this, this, danhMucDomains);
         recyclerViewDanhMucList.setAdapter(adapter2);
+
     }
 
 
