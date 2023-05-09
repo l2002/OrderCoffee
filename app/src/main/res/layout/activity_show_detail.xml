@@ -9,7 +9,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="#EFEDED"
         tools:layout_editor_absoluteY="659dp">
 
         <LinearLayout
@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/picDrink"
-                android:layout_width="400dp"
-                android:layout_height="400dp"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/logo1" />
 
@@ -43,15 +43,15 @@
                     android:textStyle="bold" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="250dp"
+                    android:layout_width="300dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:background="@drawable/grey_bar">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="155dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="95dp"
+                        android:layout_width="145dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="155dp"
                         android:background="@drawable/yellow_bg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -86,8 +86,10 @@
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                            app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0" />
 
                         <ImageView
                             android:id="@+id/imageView8"
@@ -133,7 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="fddddddd"
+                    android:text="mota"
                     android:textColor="#686868"
                     android:textSize="20sp" />
 
@@ -143,15 +145,50 @@
                     android:orientation="horizontal">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/grey_btn">
 
                         <TextView
                             android:id="@+id/textView18"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Tổng tiền"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txtTongTIen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 VND"
+                            android:textColor="#000000"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@+id/textView18"
+                            app:layout_constraintTop_toBottomOf="@+id/textView18" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/btnAddToCard"
+                        android:layout_width="0dp"
+                        android:layout_height="65dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/yellow_btn"
+                        android:drawableStart="@drawable/shopping_cart"
+                        android:drawablePadding="5dp"
+                        android:elevation="3dp"
+                        android:gravity="center"
+                        android:text="Add to cart"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -53,7 +53,7 @@ public class ShowDetailActivity extends AppCompatActivity {
         picDrink.setImageBitmap(bitmap);
 
         txtTieuDe.setText(object.getTieuDe());
-        txtGia.setText(String.valueOf(object.getFee()));
+        txtGia.setText(String.valueOf(object.getFee())+" "+"VND");
         txtMoTa.setText(object.getMoTa());
 
         txtNumOrder.setText(String.valueOf(soLuong));
@@ -77,17 +77,17 @@ public class ShowDetailActivity extends AppCompatActivity {
             }
         });
 
-//        btnAddToCart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                object.setNumberInCart(soLuong);
-//                managementCart.insertDrink(object);
-//            }
-//        });
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                object.setNumberInCart(soLuong);
+                managementCart.insertDrink(object);
+            }
+        });
     }
 
     private void initView() {
-        //btnAddToCart=findViewById(R.id.btnAddToCard);
+        btnAddToCart=findViewById(R.id.btnAddToCard);
         txtTieuDe=findViewById(R.id.txtTieuDe);
         picDrink=findViewById(R.id.picDrink);
         txtGia=findViewById(R.id.txtGia);
