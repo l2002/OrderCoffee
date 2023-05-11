@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     tools:context=".Activity.MainActivity">
 
     <ScrollView
@@ -358,13 +360,14 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/cartBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FF5E80"
             android:elevation="3dp"
             android:src="@drawable/shopping_cart"
-            app:layout_anchor="@id/app_bar"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+            app:layout_anchor="@id/app_bar">
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

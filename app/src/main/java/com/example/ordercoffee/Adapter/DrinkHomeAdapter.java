@@ -1,5 +1,6 @@
 package com.example.ordercoffee.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -40,7 +41,7 @@ public class DrinkHomeAdapter extends RecyclerView.Adapter<DrinkHomeAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DrinkHomeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DrinkHomeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final Drink drink=list.get(position);
         Bitmap bitmap= BitmapFactory.decodeByteArray(drink.getAnh(),0,drink.getAnh().length);
 

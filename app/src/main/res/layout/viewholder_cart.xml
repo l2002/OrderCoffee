@@ -10,9 +10,9 @@
     android:layout_marginBottom="10dp">
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/pic2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_margin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,49 +23,47 @@
         android:id="@+id/txtTieude2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="20dp"
         android:text="Tieude"
         android:textColor="#373B54"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintStart_toEndOf="@+id/pic2"
+        app:layout_constraintTop_toTopOf="@+id/pic2" />
 
     <TextView
         android:id="@+id/feeEachItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="20dp"
         android:text="0 VND"
         android:textColor="#373B54"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/txtTieude2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtTieude2"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintStart_toEndOf="@+id/pic2"
+        app:layout_constraintTop_toBottomOf="@+id/txtTieude2" />
 
     <TextView
         android:id="@+id/totalEachItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:text="0 VND"
         android:textColor="#373B54"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/feeEachItem"
-        app:layout_constraintStart_toStartOf="@+id/feeEachItem"
+        app:layout_constraintStart_toEndOf="@+id/pic2"
         app:layout_constraintTop_toBottomOf="@+id/feeEachItem" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_marginLeft="20dp"
         android:layout_width="130dp"
         android:layout_height="38dp"
         android:background="@drawable/yellow_bg"
-        app:layout_constraintBottom_toBottomOf="@+id/totalEachItem"
-        app:layout_constraintStart_toStartOf="@+id/txtTieude2"
-        app:layout_constraintTop_toTopOf="@+id/totalEachItem">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pic2"
+        app:layout_constraintTop_toBottomOf="@+id/totalEachItem">
 
         <TextView
             android:id="@+id/btnPlus"
@@ -97,7 +95,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageView8"

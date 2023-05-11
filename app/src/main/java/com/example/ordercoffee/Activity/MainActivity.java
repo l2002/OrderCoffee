@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.ordercoffee.Adapter.DanhMucAdapter;
@@ -22,6 +23,7 @@ import com.example.ordercoffee.Helper.DBHelper;
 import com.example.ordercoffee.Model.DanhMuc;
 import com.example.ordercoffee.Model.Drink;
 import com.example.ordercoffee.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -57,6 +59,14 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
         drinkHomeAdapter = new DrinkHomeAdapter(this, list);
         rycRecyclerViewFoodList.setAdapter(drinkHomeAdapter);
         rycRecyclerViewFoodList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        FloatingActionButton cartBtn=findViewById(R.id.cartBtn);
+        cartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,CartActivity.class));
+            }
+        });
     }
     private  void readData(){
         database= DBHelper.initDatabase(this,DATABASE_NAME);

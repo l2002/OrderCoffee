@@ -50,7 +50,7 @@ public class ManagementCart {
         changeNumberItemListenner.changed();
     }
 
-    public void plusNumberrink(ArrayList<Drink> listDrink,int position,ChangeNumberItemListenner changeNumberItemListenner){
+    public void plusNumberDrink(ArrayList<Drink> listDrink,int position,ChangeNumberItemListenner changeNumberItemListenner){
         listDrink.get(position).setNumberInCart(listDrink.get(position).getNumberInCart()+1);
         tinyDB.putListObject("CartList",listDrink);
         changeNumberItemListenner.changed();
