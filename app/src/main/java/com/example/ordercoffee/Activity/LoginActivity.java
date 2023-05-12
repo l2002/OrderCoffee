@@ -36,11 +36,10 @@ public class LoginActivity extends AppCompatActivity {
                 else if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
                     //correct
                     Toast.makeText(LoginActivity.this,"CHÀO MỪNG ADMIN",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, DisplayDrinkActivity.class));
+                    startActivity(new Intent(LoginActivity.this, AdminActivity.class));
                 }else
                     //incorrect
                     Toast.makeText(LoginActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
 

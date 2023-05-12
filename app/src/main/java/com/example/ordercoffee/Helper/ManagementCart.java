@@ -36,7 +36,6 @@ public class ManagementCart {
             listDrink.add(item);
         }
         tinyDB.putListObject("CartList",listDrink);
-
         Toast.makeText(context, "Đã thêm vào giỏ hàng của bạn", Toast.LENGTH_SHORT).show();
     }
 
@@ -60,7 +59,7 @@ public class ManagementCart {
         ArrayList<Drink>list=getListCart();
         double fee=0;
         for(int i=0;i<list.size();i++){
-            fee=fee+(list.get(i).getFee()+list.get(i).getNumberInCart());
+            fee=fee+(list.get(i).getFee()*list.get(i).getNumberInCart());
         }
         return fee;
     }

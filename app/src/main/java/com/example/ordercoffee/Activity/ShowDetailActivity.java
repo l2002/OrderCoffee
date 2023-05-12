@@ -19,7 +19,7 @@ import java.io.ByteArrayOutputStream;
 
 public class ShowDetailActivity extends AppCompatActivity {
     private TextView btnAddToCart;
-    private TextView txtTieuDe,txtGia,txtMoTa,txtNumOrder;
+    private TextView txtTieuDe,txtGia,txtMoTa,txtNumOrder,txtTotalPrice;
     private ImageView picDrink;
     private TextView btnPlus,btnMinus;
     private Drink object;
@@ -57,13 +57,13 @@ public class ShowDetailActivity extends AppCompatActivity {
         txtMoTa.setText(object.getMoTa());
 
         txtNumOrder.setText(String.valueOf(soLuong));
-
+        txtTotalPrice.setText(String.valueOf(soLuong*object.getFee())+" "+"VND");
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                soLuong=soLuong+1;
                txtNumOrder.setText(String.valueOf(soLuong));
-
+               txtTotalPrice.setText(String.valueOf(soLuong*object.getFee()+" "+"VND"));
             }
         });
 
@@ -74,6 +74,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                     soLuong=soLuong-1;
                 }
                 txtNumOrder.setText(String.valueOf(soLuong));
+                txtTotalPrice.setText(soLuong*object.getFee()+" "+"VND");
             }
         });
 
@@ -95,5 +96,6 @@ public class ShowDetailActivity extends AppCompatActivity {
         txtNumOrder=findViewById(R.id.txtNumOrder);
         btnPlus=findViewById(R.id.btnPlus);
         btnMinus=findViewById(R.id.btnMinus);
+        txtTotalPrice=findViewById(R.id.txtTongTIen);
     }
 }

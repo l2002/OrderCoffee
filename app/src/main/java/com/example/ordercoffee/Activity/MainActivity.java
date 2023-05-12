@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
     private RecyclerView recyclerViewDanhMucList,recyclerViewPhoBienList, rycRecyclerViewFoodList;
 
     DrinkHomeAdapter drinkHomeAdapter;
+    PhoBienAdapter phoBienAdapter;
     ////Vertical
     ArrayList<Drink> list;
-    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
 
         recyclerViewDanhMuc();
 
-        recyclerViewPhoBien();
+        addControlsPhoBien();
+        readDataPhoBien();
 
         addControls();
         readData();
@@ -85,6 +86,40 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
         drinkHomeAdapter.notifyDataSetChanged();
     }
 
+    private void addControlsPhoBien() {
+        list = new ArrayList<>();
+
+        recyclerViewPhoBienList=findViewById(R.id.phoBien_View);
+        phoBienAdapter = new PhoBienAdapter(this, list);
+        recyclerViewPhoBienList.setAdapter(phoBienAdapter);
+        recyclerViewPhoBienList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        FloatingActionButton cartBtn=findViewById(R.id.cartBtn);
+        cartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,CartActivity.class));
+            }
+        });
+    }
+
+    private  void readDataPhoBien(){
+        database= DBHelper.initDatabase(this,DATABASE_NAME);
+        Cursor cursor=database.rawQuery("select * from drink where id=1",null);
+        list.clear();
+        for (int i=0;i<cursor.getCount();i++){
+            cursor.moveToPosition(i);
+            int id=cursor.getInt(0);
+            String tieude=cursor.getString(1);
+            byte[]anh=cursor.getBlob(2);
+            String mota=cursor.getString(3);
+            Double gia=cursor.getDouble(4);
+
+            list.add(new Drink(id,tieude,anh,mota,gia));
+        }
+        phoBienAdapter.notifyDataSetChanged();
+    }
+
     private void recyclerViewDanhMuc() {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerViewDanhMucList=findViewById(R.id.recyclerView);
@@ -96,23 +131,8 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
 
         adapter2 = new DanhMucAdapter(this, this, danhMucDomains);
         recyclerViewDanhMucList.setAdapter(adapter2);
-
     }
 
-
-    private void recyclerViewPhoBien(){
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        recyclerViewPhoBienList=findViewById(R.id.recyclerView2);
-        recyclerViewPhoBienList.setLayoutManager(linearLayoutManager);
-
-        ArrayList<Drink> pb=new ArrayList<>();
-        pb.add(new Drink(1,"Coffee",null,"Ngon",10));
-        pb.add(new Drink(2,"Capuchino",null,"Đắng",10));
-        pb.add(new Drink(3,"Trà đào",null,"Chua",10));
-
-        adapter2=new PhoBienAdapter(pb);
-        recyclerViewPhoBienList.setAdapter(adapter2);
-    }
 
     @Override
     public void callBack(int position, ArrayList<Drink> list) {
