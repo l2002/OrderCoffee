@@ -41,7 +41,6 @@ public class AddDrinkActivity extends AppCompatActivity {
 
         addControls();
         addEvents();
-
     }
 
     public void addControls(){

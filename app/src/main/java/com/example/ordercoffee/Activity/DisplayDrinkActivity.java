@@ -46,16 +46,6 @@ public class DisplayDrinkActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        btnHome=(Button) findViewById(R.id.btnHome);
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(DisplayDrinkActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
         listView=(ListView) findViewById(R.id.lv_drink);
         list=new ArrayList<>();
         foodAdapter=new DrinkAdapter(this,list);

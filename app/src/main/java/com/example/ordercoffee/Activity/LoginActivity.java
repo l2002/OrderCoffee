@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
 
-        //admin and admin
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                 }else
                     //incorrect
                     Toast.makeText(LoginActivity.this,"LOGIN FAILED !!!",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
 
