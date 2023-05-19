@@ -59,20 +59,25 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void insert(){
-        String totalFee=txtTotalFee.getText().toString();
-        String vanChuyehn=txtDelivery.getText().toString();
-        String thue=txtTax.getText().toString();
-        String total=txtTotal.getText().toString();
+        try {
+            String totalFee = txtTotalFee.getText().toString();
+            String vanChuyehn = txtDelivery.getText().toString();
+            String thue = txtTax.getText().toString();
+            String total = txtTotal.getText().toString();
 
-        ContentValues contentValues=new ContentValues();
 
-        contentValues.put("totalfee",totalFee);
-        contentValues.put("delivery",vanChuyehn);
-        contentValues.put("tax",thue);
-        contentValues.put("total",total);
+            ContentValues contentValues = new ContentValues();
 
-        SQLiteDatabase database= DBHelper.initDatabase(CartActivity.this,"android.db");
-        database.insert("card",null,contentValues);
+            contentValues.put("totalfee", totalFee);
+            contentValues.put("delivery", vanChuyehn);
+            contentValues.put("tax", thue);
+            contentValues.put("total", total);
+
+            SQLiteDatabase database = DBHelper.initDatabase(CartActivity.this, "android.db");
+            database.insert("cart", null, contentValues);
+        }catch (Exception e){
+            Toast.makeText(this, "Đã xảy ra lỗi", Toast.LENGTH_SHORT).show();
+        }
     }
     private void initList() {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
