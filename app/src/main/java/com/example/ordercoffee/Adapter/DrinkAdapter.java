@@ -79,7 +79,7 @@ public class DrinkAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, UpdateDrinkActivity.class);
-                intent.putExtra("id",drink.getId());
+                intent.putExtra("id_drink",drink.getId());
                 context.startActivity(intent);
             }
         });

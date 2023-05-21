@@ -36,6 +36,7 @@ public class ManagementCart {
             listDrink.add(item);
         }
         tinyDB.putListObject("CartList",listDrink);
+
         Toast.makeText(context, "Đã thêm vào giỏ hàng của bạn", Toast.LENGTH_SHORT).show();
     }
 

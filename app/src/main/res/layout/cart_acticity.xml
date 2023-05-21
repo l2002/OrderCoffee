@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Tổng tiền sản phẩm:"
+                        android:text="Thành tiền:"
                         android:textColor="#373B54"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -159,7 +159,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtTotal"
+                        android:id="@+id/txtTongTien"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 VND"
@@ -190,6 +190,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

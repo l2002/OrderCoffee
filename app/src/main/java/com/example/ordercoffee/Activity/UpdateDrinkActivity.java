@@ -44,7 +44,7 @@ public class UpdateDrinkActivity extends AppCompatActivity {
 
     private void initUI() {
         Intent intent=getIntent();
-        String id= String.valueOf(intent.getIntExtra("id",-1));
+        String id= String.valueOf(intent.getIntExtra("id_drink",-1));
         SQLiteDatabase database= DBHelper.initDatabase(this,DATABASE_NAME);
         Cursor cursor=database.rawQuery("select * from drink where id=?",new String[]{id+"",});
         cursor.moveToFirst();
@@ -71,14 +71,14 @@ public class UpdateDrinkActivity extends AppCompatActivity {
         String gia=edtGia.getText().toString();
 
         ContentValues contentValues=new ContentValues();
-        contentValues.put("id",id);
+        contentValues.put("id_drink",id);
         contentValues.put("tieude",tieude);
         contentValues.put("anh",anh);
         contentValues.put("mota",mota);
         contentValues.put("gia",gia);
 
         SQLiteDatabase database= DBHelper.initDatabase(this,"android.db");
-        database.update("drink",contentValues,"id=?",new String[]{id+""});
+        database.update("drink",contentValues,"id_drink=?",new String[]{id+""});
         Intent intent=new Intent(this,DisplayDrinkActivity.class);
         startActivity(intent);
     }

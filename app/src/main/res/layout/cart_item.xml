@@ -15,31 +15,36 @@
             android:id="@+id/txtId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ID: " />
+            android:text="Mã HĐ:"
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txtTotalFee"
+            android:id="@+id/txtVanChuyen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tổng tiền sản phẩm: " />
+            android:text="Vận chuyển:"
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txtDelivery"
+            android:id="@+id/txtTaxx"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phí vạn chuyển: " />
+            android:text="Thuế:"
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txtTax"
+            android:id="@+id/txtTongTien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thuế: " />
+            android:text="Tổng tiền:"
+            android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/txtTotal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tổng tiền: " />
+        <View
+            android:id="@+id/view4"
+            android:layout_width="392dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="#707070" />
 
 
     </LinearLayout>

@@ -115,7 +115,7 @@ public class AddDrinkActivity extends AppCompatActivity {
         String gia=edtGia.getText().toString();
 
         ContentValues contentValues=new ContentValues();
-        contentValues.put("id",id);
+        contentValues.put("id_drink",id);
         contentValues.put("tieude",tieude);
         contentValues.put("anh",anh);
         contentValues.put("mota",mota);

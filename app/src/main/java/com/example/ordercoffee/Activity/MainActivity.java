@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
 
     private  void readDataPhoBien(){
         database= DBHelper.initDatabase(this,DATABASE_NAME);
-        Cursor cursor=database.rawQuery("select * from drink where id=1",null);
+        Cursor cursor=database.rawQuery("select * from drink where id_drink=1",null);
         list.clear();
         for (int i=0;i<cursor.getCount();i++){
             cursor.moveToPosition(i);

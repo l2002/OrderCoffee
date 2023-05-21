@@ -1,28 +1,25 @@
 package com.example.ordercoffee.Model;
 
 public class Cart {
-    private int id;
-    private double totalFee;
+    private int id_cart;
     private double delivery;
     private double tax;
     private double total;
 
-    public Cart(int id,double totalFee, double delivery, double tax, double total) {
-        this.id = id;
-        this.totalFee = totalFee;
-        this.delivery = delivery;
-        this.tax = tax;
-        this.total = total;
+    public int getId_cart() {
+        return id_cart;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public double getDelivery() {
+        return delivery;
     }
 
+    public double getTax() {
+        return tax;
+    }
 
-
-    public void setTotalFee(double totalFee) {
-        this.totalFee = totalFee;
+    public void setId_cart(int id_cart) {
+        this.id_cart = id_cart;
     }
 
     public void setDelivery(double delivery) {
@@ -37,24 +34,14 @@ public class Cart {
         this.total = total;
     }
 
-    public int getId() {
-        return id;
-    }
-
-
-    public double getTotalFee() {
-        return totalFee;
-    }
-
-    public double getDelivery() {
-        return delivery;
-    }
-
-    public double getTax() {
-        return tax;
-    }
-
     public double getTotal() {
         return total;
+    }
+
+    public Cart(int id_cart, double delivery, double tax, double total) {
+        this.id_cart = id_cart;
+        this.delivery = delivery;
+        this.tax = tax;
+        this.total = total;
     }
 }

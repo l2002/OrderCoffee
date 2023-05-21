@@ -25,34 +25,40 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText username,password;
+    private EditText edtusername,edtpassword;
     List<User> mListUser;
+    private User mUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
 
-         username = findViewById(R.id.username);
-         password = findViewById(R.id.password);
+        edtusername = findViewById(R.id.username);
+        edtpassword = findViewById(R.id.password);
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
-        mListUser=new ArrayList<>();
+        mListUser = new ArrayList<>();
         getListUsers();
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.getText().toString().equals("")||password.getText().toString().equals("")){
-                    Toast.makeText(LoginActivity.this,"Không được để trống tên đăng nhập và mật khẩu",Toast.LENGTH_SHORT).show();
+                //clickLogin();
+            }
+        });
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edtusername.getText().toString().equals("") || edtpassword.getText().toString().equals("")) {
+                    Toast.makeText(LoginActivity.this, "Không được để trống tên đăng nhập và mật khẩu", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
+                } else if (edtusername.getText().toString().equals("admin") && edtpassword.getText().toString().equals("admin")) {
                     //correct
                     startActivity(new Intent(LoginActivity.this, AdminActivity.class));
-                    Toast.makeText(LoginActivity.this,"CHÀO MỪNG ADMIN",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "CHÀO MỪNG ADMIN", Toast.LENGTH_SHORT).show();
 
-                }else {
+                } else {
                     //incorrect
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     Toast.makeText(LoginActivity.this, "LOGIN FAILED !!!", Toast.LENGTH_SHORT).show();
@@ -61,29 +67,50 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
+    private void clickLogin() {
+        String username=edtusername.getText().toString().trim();
+        String password=edtpassword.getText().toString().trim();
+
+        if(mListUser==null||mListUser.isEmpty()){
+            Toast.makeText(LoginActivity.this, "Username and password Empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        boolean isHasUser=false;
+        for(User user: mListUser){
+            if(username.equals(user.getUsername())&password.equals(user.getPassword())){
+                isHasUser=true;
+                mUser=user;
+                break;
+            }
+        }
+        if(isHasUser){
+            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("Object_user",mUser);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }else {
+            Toast.makeText(LoginActivity.this, "Username or password invalid", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private void getListUsers() {
-        ApiService.API_SERVICE.callApi()
-                .enqueue(new Callback<List<User>>() {
-                    @Override
-                    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                      mListUser=response.body();
-                        Toast.makeText(LoginActivity.this, "sucess", Toast.LENGTH_SHORT).show();
-                    }
 
-                    @Override
-                    public void onFailure(Call<List<User>> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "err", Toast.LENGTH_SHORT).show();
-                    }
-                });
-        }
+            ApiService.API_SERVICE.callApi("json-server","password")
+                    .enqueue(new Callback<List<User>>() {
+                        @Override
+                        public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                            mListUser=response.body();
+                            Log.e("List user",mListUser.size()+"");
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<User>> call, Throwable t) {
+                            Toast.makeText(LoginActivity.this, "err", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+    }
 }

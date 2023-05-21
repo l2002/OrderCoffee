@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -44,17 +43,7 @@ public class CartActivity extends AppCompatActivity {
         initView();
         initList();
         calculateCart();
-        thanhToan();
-    }
-
-    private void thanhToan(){
-        btnThanhToan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                insert();
-                Toast.makeText(CartActivity.this, "Đã thanh thoán", Toast.LENGTH_SHORT).show();
-            }
-        });
+        //thanhToan();
 
     }
 
@@ -63,15 +52,15 @@ public class CartActivity extends AppCompatActivity {
             String totalFee = txtTotalFee.getText().toString();
             String vanChuyehn = txtDelivery.getText().toString();
             String thue = txtTax.getText().toString();
-            String total = txtTotal.getText().toString();
-
+            String tongtien = txtTotal.getText().toString();
 
             ContentValues contentValues = new ContentValues();
 
-            contentValues.put("totalfee", totalFee);
+
             contentValues.put("delivery", vanChuyehn);
             contentValues.put("tax", thue);
-            contentValues.put("total", total);
+            contentValues.put("total", tongtien);
+
 
             SQLiteDatabase database = DBHelper.initDatabase(CartActivity.this, "android.db");
             database.insert("cart", null, contentValues);
@@ -97,6 +86,14 @@ public class CartActivity extends AppCompatActivity {
             txtEmpty.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
         }
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insert();
+                Toast.makeText(CartActivity.this, "Đã thanh thoán", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(CartActivity.this, ThanksActivity.class));
+            }
+        });
 
     }
 
@@ -118,7 +115,7 @@ public class CartActivity extends AppCompatActivity {
         txtTotalFee=findViewById(R.id.txtTotalFee);
         txtDelivery=findViewById(R.id.txtDelivery);
         txtTax=findViewById(R.id.txtTax);
-        txtTotal=findViewById(R.id.txtTotal);
+        txtTotal=findViewById(R.id.txtTongTien);
         recyclerView=findViewById(R.id.view);
         scrollView=findViewById(R.id.scrollView);
         txtEmpty=findViewById(R.id.txtEmpty);

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.OrderCoffee"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.ThanksActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DisplayCartActivity"
             android:exported="false" />
         <activity
