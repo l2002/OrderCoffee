@@ -46,7 +46,7 @@ public class UpdateDrinkActivity extends AppCompatActivity {
         Intent intent=getIntent();
         String id= String.valueOf(intent.getIntExtra("id_drink",-1));
         SQLiteDatabase database= DBHelper.initDatabase(this,DATABASE_NAME);
-        Cursor cursor=database.rawQuery("select * from drink where id=?",new String[]{id+"",});
+        Cursor cursor=database.rawQuery("select * from drink where id_drink=?",new String[]{id+"",});
         cursor.moveToFirst();
 
         String tieude=cursor.getString(1);

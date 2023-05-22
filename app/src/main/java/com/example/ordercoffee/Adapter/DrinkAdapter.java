@@ -112,7 +112,7 @@ public class DrinkAdapter extends BaseAdapter {
 
     private void delete(int idDrink){
         SQLiteDatabase database= DBHelper.initDatabase((Activity) context,"android.db");
-        database.delete("drink","id=?",new String[]{idDrink+""});
+        database.delete("drink","id_drink=?",new String[]{idDrink+""});
         list.clear();
         Cursor cursor=database.rawQuery("select * from drink",null);
         while (cursor.moveToNext()){

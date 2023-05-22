@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements UpdateDanhMucRec 
                 startActivity(new Intent(MainActivity.this,CartActivity.class));
             }
         });
+
+
     }
     private  void readData(){
         database= DBHelper.initDatabase(this,DATABASE_NAME);
