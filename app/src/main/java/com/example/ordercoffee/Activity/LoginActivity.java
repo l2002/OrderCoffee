@@ -1,116 +1,197 @@
 package com.example.ordercoffee.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ordercoffee.API.ApiService;
-import com.example.ordercoffee.Model.User;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.ordercoffee.API.KeyValuePair;
 import com.example.ordercoffee.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
 
-import java.io.Serializable;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText edtusername,edtpassword;
-    List<User> mListUser;
-    private User mUser;
+    EditText edtUsername;
+    EditText edtPassword;
+    MaterialButton btnLogin;
+
+//    @Override//   protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.login);
+//
+//        edtUsername = (EditText) findViewById(R.id.username);
+//        edtPassword = (EditText) findViewById(R.id.password);
+//        btnLogin = (MaterialButton) findViewById(R.id.loginbtn);
+//
+//        btnLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (edtUsername.getText().toString().equals("") || edtPassword.getText().toString().equals("")) {
+//                    Toast.makeText(LoginActivity.this, "Không được để trống tên đăng nhập và mật khẩu", Toast.LENGTH_SHORT).show();
+//                    return;
+//                } else if (edtUsername.getText().toString().equals("admin") && edtPassword.getText().toString().equals("admin")) {
+//                    //correct
+//                    startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+//                    Toast.makeText(LoginActivity.this, "CHÀO MỪNG ADMIN", Toast.LENGTH_SHORT).show();
+//
+//                } else {
+//                    //incorrect
+//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                    Toast.makeText(LoginActivity.this, "LOGIN FAILED !!!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//    }
+    MaterialButton bt_login;
+    EditText et_username, et_password;
+    Gson gson;
+    SharedPreferences sharedPreferences;
+    String URL = "https://jsonblob.com/api/1110452290778841088";
+
+    public static final String Sp_Status = "Status";
+    public static final String MyPref = "MyPref";
+    static int mStatusCode = 0;
+    public String username, password;
+    private Boolean exit = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.login);
+        et_username = (EditText) findViewById(R.id.username);
+        et_password = (EditText) findViewById(R.id.password);
+        bt_login = (MaterialButton) findViewById(R.id.loginbtn);
+        OnClick();
+        sharedPreferences = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
+//        if (sharedPreferences.getString(LoginActivity.Sp_Status,"").matches("LoggedIn")){
+//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//        }
+    }
 
-
-        edtusername = findViewById(R.id.username);
-        edtpassword = findViewById(R.id.password);
-
-        MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
-        mListUser = new ArrayList<>();
-        getListUsers();
-
-        loginbtn.setOnClickListener(new View.OnClickListener() {
+    private void OnClick() {
+        bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //clickLogin();
+                username = et_username.getText().toString().trim();
+                password = et_password.getText().toString().trim();
+
+                if(username.equals("admin")&&password.equals("admin")){
+                    Toast.makeText(LoginActivity.this, "Chào mừng Admin", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                }
+                if (username.length() >= 1) {
+                    if (password.length() >= 1) {
+                        loginapi();
+                    } else {
+                        et_password.setError("Hãy nhập password");
+                    }
+                } else {
+                    et_username.setError("Hãy nhập username");
+                }
+
             }
         });
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edtusername.getText().toString().equals("") || edtpassword.getText().toString().equals("")) {
-                    Toast.makeText(LoginActivity.this, "Không được để trống tên đăng nhập và mật khẩu", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (edtusername.getText().toString().equals("admin") && edtpassword.getText().toString().equals("admin")) {
-                    //correct
-                    startActivity(new Intent(LoginActivity.this, AdminActivity.class));
-                    Toast.makeText(LoginActivity.this, "CHÀO MỪNG ADMIN", Toast.LENGTH_SHORT).show();
+    }
 
-                } else {
-                    //incorrect
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    Toast.makeText(LoginActivity.this, "LOGIN FAILED !!!", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Nhấn Quay lại lần nữa để Thoát.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+        }
+    }
+
+    private void loginapi() {
+        ArrayList<KeyValuePair> params = new ArrayList<KeyValuePair>();
+        params.add(new KeyValuePair("username", username));
+        params.add(new KeyValuePair("password", password));
+        RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        String username1= et_username.getText().toString().trim();
+                        String password1 = et_password.getText().toString().trim();
+                        sharedPreferences = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        gson = new Gson();
+                        switch (mStatusCode) {
+                            case 200:
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    gson.fromJson(jsonObject.toString(), KeyValuePair.class);
+                                    if(username1==jsonObject.getJSONObject("username").toString().trim()&&password1==jsonObject.getJSONObject("password").toString().trim()){
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                        editor.putString(Sp_Status, "LoggedIn");
+                                        editor.commit();
+                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        finish();
+                                    }else {
+                                        Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                        }
+                    }
+                }
+                , new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(LoginActivity.this, "Server Down", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
-
-
-    }
-
-    private void clickLogin() {
-        String username=edtusername.getText().toString().trim();
-        String password=edtpassword.getText().toString().trim();
-
-        if(mListUser==null||mListUser.isEmpty()){
-            Toast.makeText(LoginActivity.this, "Username and password Empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        boolean isHasUser=false;
-        for(User user: mListUser){
-            if(username.equals(user.getUsername())&password.equals(user.getPassword())){
-                isHasUser=true;
-                mUser=user;
-                break;
+        }) {
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                mStatusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
             }
-        }
-        if(isHasUser){
-            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("Object_user",mUser);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }else {
-            Toast.makeText(LoginActivity.this, "Username or password invalid", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void getListUsers() {
-
-            ApiService.API_SERVICE.callApi("json-server","password")
-                    .enqueue(new Callback<List<User>>() {
-                        @Override
-                        public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                            mListUser=response.body();
-                            Log.e("List user",mListUser.size()+"");
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<User>> call, Throwable t) {
-                            Toast.makeText(LoginActivity.this, "err", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        };
+        stringRequest.setRetryPolicy(new
+                DefaultRetryPolicy(3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
+        requestQueue.add(stringRequest);
     }
 }

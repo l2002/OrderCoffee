@@ -35,7 +35,7 @@ public class CartActivity extends AppCompatActivity {
     private ConstraintLayout btnThanhToan;
     private double tax;
     private ScrollView scrollView;
-    LinearLayout btnHome;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +47,6 @@ public class CartActivity extends AppCompatActivity {
         calculateCart();
         //thanhToan();
 
-
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CartActivity.this, MainActivity.class));
-            }
-        });
     }
 
     private void insert(){
@@ -120,7 +113,6 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        btnHome=findViewById(R.id.homeBtn);
         txtTotalFee=findViewById(R.id.txtTotalFee);
         txtDelivery=findViewById(R.id.txtDelivery);
         txtTax=findViewById(R.id.txtTax);

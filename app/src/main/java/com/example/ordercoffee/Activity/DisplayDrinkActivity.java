@@ -25,7 +25,7 @@ public class DisplayDrinkActivity extends AppCompatActivity {
 
     ListView listView;
     ArrayList<Drink> list;
-    DrinkAdapter foodAdapter;
+    DrinkAdapter drinkAdapter;
     FloatingActionButton btnAdd;
     Button btnHome;
     @Override
@@ -48,8 +48,8 @@ public class DisplayDrinkActivity extends AppCompatActivity {
         });
         listView=(ListView) findViewById(R.id.lv_drink);
         list=new ArrayList<>();
-        foodAdapter=new DrinkAdapter(this,list);
-        listView.setAdapter(foodAdapter);
+        drinkAdapter=new DrinkAdapter(this,list);
+        listView.setAdapter(drinkAdapter);
     }
 
     private  void readData(){
@@ -66,6 +66,6 @@ public class DisplayDrinkActivity extends AppCompatActivity {
 
             list.add(new Drink(id,tieude,anh,mota,gia));
         }
-        foodAdapter.notifyDataSetChanged();
+        drinkAdapter.notifyDataSetChanged();
     }
 }

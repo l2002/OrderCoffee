@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ordercoffee.R;
 
 public class AdminActivity extends AppCompatActivity {
-    LinearLayout btnHome,btnQuanLy,btnCart;
+    LinearLayout btnHome,btnQuanLy,btnCart,btnFeedBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +19,8 @@ public class AdminActivity extends AppCompatActivity {
         btnHome=findViewById(R.id.btnHome);
         btnQuanLy=findViewById(R.id.btnQuanLy);
         btnCart=findViewById(R.id.btnCart);
+        btnCart=findViewById(R.id.btnCart);
+        btnFeedBack=findViewById(R.id.btnFeedback);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +39,13 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminActivity.this, DisplayCartActivity.class));
+            }
+        });
+
+        btnFeedBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminActivity.this, FeedbackActivity.class));
             }
         });
     }
